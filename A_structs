@@ -1,0 +1,50 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <iomanip>
+
+using namespace std;
+
+struct chelik {
+    string last_name;
+    string name;
+    pair <int, char> clas;
+    string data;
+};
+
+bool comp_clas(const chelik& a, const chelik& b)
+{
+    if (a.clas.first == b.clas.first && a.clas.second == b.clas.second) return a.last_name < b.last_name;
+    else {
+        if (a.clas.first == b.clas.first) {
+            return a.clas.second < b.clas.second;
+        }
+        else {
+            if (a.clas.first < b.clas.first) {
+                return true;
+            }
+            else return false;
+        }
+    }
+}
+
+int main()
+{
+    int tests;
+    cin >> tests;
+    vector<chelik> chelik_all(tests);
+    for (int i = 0; i < tests; i++)
+    {
+        chelik chel;
+        cin >> chelik_all[i].last_name >> chelik_all[i].name >> chelik_all[i].clas.first >> chelik_all[i].clas.second >> chelik_all[i].data;
+    }
+    sort(chelik_all.begin(), chelik_all.end(), comp_clas);
+    for (int i = 0; i < tests; i++)
+    {
+        cout << chelik_all[i].clas.first << chelik_all[i].clas.second << ' ' << chelik_all[i].last_name << ' ' << chelik_all[i].name << ' ' << chelik_all[i].data << '\n';
+    }
+}
+    
